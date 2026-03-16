@@ -1,0 +1,17 @@
+{
+  "name": "Dhanush Kumar | Portfolio",
+  "short_name": "Dhanush",
+  "description": "Personal portfolio of Dhanush Kumar, showcasing projects and skills.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#020617",
+  "theme_color": "#06b6d4",
+  "icons": [
+    {
+      "src": "/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "maskable"
+    }
+  ]
+}

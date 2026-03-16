@@ -1,129 +1,141 @@
 "use client";
 
-import { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
 import Image from "next/image";
 import { Section, SectionHeader } from "@/components/section";
 import { Card, CardContent } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
-import { Github, ExternalLink } from "lucide-react";
-
-type ProjectCategory = "All" | "Web Development" | "AI" | "IoT" | "Software Engineering";
+import { Github, ExternalLink, Cpu, Wind, Globe } from "lucide-react";
 
 const projects = [
   {
-    title: "AQ Immune Platform",
-    description: "AI-powered Air Pollution Intelligence Platform integrating advanced UI, AI predictions, geospatial visualization, and real-time IoT data.",
-    image: "https://images.unsplash.com/photo-1611273426858-450d8e3c9fce?auto=format&fit=crop&q=80&w=800",
-    categories: ["Web Development", "AI"],
-    tech: ["React 18", "Tailwind CSS", "Firebase", "LSTM Models"],
-    github: "https://github.com",
-    demo: "https://example.com"
+    title: "Car-to-Car Communication System",
+    description:
+      "A V2V (Vehicle-to-Vehicle) communication system designed for highway safety in foggy conditions. Built a hardware prototype paired with a software application that displays real-time collision alerts on the car's in-dash display, preventing pile-ups before they happen.",
+    image:
+      "https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&q=80&w=800",
+    tech: ["Embedded C", "Arduino", "RF Module", "Python", "LCD Display"],
+    icon: <Cpu className="w-5 h-5" />,
+    github: "https://github.com/Dhanush-hub-alt",
+    demo: null,
+    badge: "Hardware + Software",
+    color: "from-cyan-500/20 to-blue-500/10",
+    accent: "text-cyan-600",
   },
   {
-    title: "IoT Monitoring System",
-    description: "Real-time dashboard for monitoring industrial IoT sensor data with automated alert systems.",
-    image: "https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&q=80&w=800",
-    categories: ["IoT", "Web Development"],
-    tech: ["Next.js", "Node.js", "Socket.IO", "MongoDB"],
-    github: "https://github.com",
-    demo: "https://example.com"
+    title: "AQ‑Immune — Air Quality System",
+    description:
+      "An IoT-powered air quality monitoring and prediction platform that detects dust particles, CO₂, NO₂, and other harmful gases. The hardware sensor array feeds data into a mobile app that alerts users in real time when pollution levels become dangerous.",
+    image:
+      "https://images.unsplash.com/photo-1611273426858-450d8e3c9fce?auto=format&fit=crop&q=80&w=800",
+    tech: ["Arduino", "MQ Sensors", "React Native", "Firebase", "Python"],
+    icon: <Wind className="w-5 h-5" />,
+    github: "https://github.com/Dhanush-hub-alt",
+    demo: null,
+    badge: "IoT + Mobile App",
+    color: "from-emerald-500/20 to-teal-500/10",
+    accent: "text-emerald-600",
   },
   {
-    title: "E-Commerce Frontend",
-    description: "A comprehensive Flipkart-like e-commerce website using React and Redux Toolkit with dynamic customizer.",
-    image: "https://images.unsplash.com/photo-1607082348824-0a96f2a4b9da?auto=format&fit=crop&q=80&w=800",
-    categories: ["Web Development"],
-    tech: ["React", "Vite", "Tailwind CSS", "Redux Toolkit"],
-    github: "https://github.com",
-    demo: "https://example.com"
+    title: "Portfolio Website",
+    description:
+      "A personal professional portfolio built with Next.js 15, Framer Motion animations, and a clean modern design system. Features smooth scroll navigation, animated skill bars, project showcases, a contact form, and full responsiveness across all devices.",
+    image:
+      "https://images.unsplash.com/photo-1467232004584-a241de8bcf5d?auto=format&fit=crop&q=80&w=800",
+    tech: ["Next.js", "TypeScript", "Tailwind CSS", "Framer Motion"],
+    icon: <Globe className="w-5 h-5" />,
+    github: "https://github.com/Dhanush-hub-alt",
+    demo: null,
+    badge: "Web Development",
+    color: "from-primary/20 to-indigo-500/10",
+    accent: "text-primary",
   },
-  {
-    title: "Car Accident Alert App",
-    description: "A software application that aggregates data to detect potential collisions and immediately notifies emergency response.",
-    image: "https://images.unsplash.com/photo-1568605117036-5fe5e7bab0b7?auto=format&fit=crop&q=80&w=800",
-    categories: ["Software Engineering", "AI"],
-    tech: ["Python", "TensorFlow", "React Native"],
-    github: "https://github.com",
-    demo: "https://example.com"
-  }
 ];
 
-const categories: ProjectCategory[] = ["All", "Web Development", "AI", "IoT", "Software Engineering"];
-
 export function Projects() {
-  const [activeCategory, setActiveCategory] = useState<ProjectCategory>("All");
-  
-  const filteredProjects = projects.filter(p => activeCategory === "All" || p.categories.includes(activeCategory as any));
-
   return (
     <Section id="projects">
-      <SectionHeader 
-        title="Featured Projects" 
-        subtitle="Some of my recent work bridging the gap between design and complex engineering."
+      <SectionHeader
+        title="My Projects"
+        subtitle="Real-world hardware and software projects I have built end-to-end."
       />
-      
-      <div className="flex flex-wrap justify-center gap-3 mb-12">
-        {categories.map((cat) => (
-          <Button
-            key={cat}
-            variant={activeCategory === cat ? "default" : "outline"}
-            size="sm"
-            onClick={() => setActiveCategory(cat)}
-            className="rounded-full transition-all"
+
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 w-full max-w-6xl mx-auto mt-12">
+        {projects.map((project, i) => (
+          <motion.div
+            key={project.title}
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-50px" }}
+            transition={{ duration: 0.5, delay: i * 0.12 }}
+            className="h-full"
           >
-            {cat}
-          </Button>
+            <Card className="h-full overflow-hidden group hover:shadow-[0_4px_30px_rgba(6,182,212,0.13)] hover:border-primary/40 transition-all duration-300 flex flex-col">
+              {/* Image */}
+              <div className="relative h-52 w-full overflow-hidden flex-shrink-0">
+                <div className="absolute inset-0 bg-black/30 group-hover:bg-black/10 transition-colors z-10" />
+                <Image
+                  src={project.image}
+                  alt={project.title}
+                  fill
+                  sizes="(max-width: 768px) 100vw, 33vw"
+                  className="object-cover group-hover:scale-105 transition-transform duration-700 ease-in-out"
+                />
+                {/* Badge */}
+                <span className="absolute top-3 left-3 z-20 text-xs font-semibold px-3 py-1 rounded-full bg-black/60 text-white backdrop-blur-sm border border-white/20">
+                  {project.badge}
+                </span>
+                {/* Action buttons */}
+                <div className="absolute bottom-3 right-3 z-20 flex gap-2 opacity-0 group-hover:opacity-100 transition-all duration-300 translate-y-2 group-hover:translate-y-0">
+                  <a
+                    href={project.github}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="w-9 h-9 flex items-center justify-center rounded-full bg-black/60 hover:bg-black/90 text-white backdrop-blur-md border border-white/20 transition-colors"
+                    aria-label="GitHub"
+                  >
+                    <Github className="h-4 w-4" />
+                  </a>
+                  {project.demo && (
+                    <a
+                      href={project.demo}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="w-9 h-9 flex items-center justify-center rounded-full bg-primary/80 hover:bg-primary text-white backdrop-blur-md border border-white/20 transition-colors"
+                      aria-label="Live Demo"
+                    >
+                      <ExternalLink className="h-4 w-4" />
+                    </a>
+                  )}
+                </div>
+              </div>
+
+              {/* Content */}
+              <CardContent className="p-6 flex flex-col flex-1">
+                <div className={`inline-flex items-center gap-2 text-sm font-semibold mb-3 ${project.accent}`}>
+                  {project.icon}
+                  <span>{project.badge}</span>
+                </div>
+                <h3 className="text-xl font-bold mb-3 group-hover:text-primary transition-colors leading-snug">
+                  {project.title}
+                </h3>
+                <p className="text-foreground/65 text-sm leading-relaxed mb-5 flex-1">
+                  {project.description}
+                </p>
+                <div className="flex flex-wrap gap-2 mt-auto">
+                  {project.tech.map((t) => (
+                    <span
+                      key={t}
+                      className="text-xs font-medium px-3 py-1 rounded-full bg-primary/8 text-primary border border-primary/20"
+                    >
+                      {t}
+                    </span>
+                  ))}
+                </div>
+              </CardContent>
+            </Card>
+          </motion.div>
         ))}
       </div>
-
-      <motion.div layout className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-8 w-full max-w-6xl mx-auto min-h-[500px]">
-        <AnimatePresence mode="popLayout">
-          {filteredProjects.map((project) => (
-            <motion.div
-              layout
-              key={project.title}
-              initial={{ opacity: 0, scale: 0.9 }}
-              animate={{ opacity: 1, scale: 1 }}
-              exit={{ opacity: 0, scale: 0.9 }}
-              transition={{ duration: 0.3 }}
-              className="h-full"
-            >
-              <Card className="h-full overflow-hidden group hover:shadow-[0_0_30px_rgba(6,182,212,0.15)] transition-shadow">
-                <div className="relative h-60 w-full overflow-hidden">
-                  <div className="absolute inset-0 bg-black/40 group-hover:bg-black/10 transition-colors z-10" />
-                  <Image 
-                    src={project.image} 
-                    alt={project.title} 
-                    fill
-                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                    className="object-cover group-hover:scale-110 transition-transform duration-700 ease-in-out"
-                  />
-                  <div className="absolute bottom-4 right-4 z-20 flex gap-2 opacity-0 group-hover:opacity-100 transition-opacity translate-y-2 group-hover:translate-y-0">
-                    <Button size="icon" variant="glass" className="rounded-full bg-black/50 hover:bg-black/80 text-white backdrop-blur-md border-white/20" asChild>
-                      <a href={project.github} target="_blank" rel="noreferrer"><Github className="h-4 w-4" /></a>
-                    </Button>
-                    <Button size="icon" variant="glass" className="rounded-full bg-primary/80 hover:bg-primary text-white backdrop-blur-md border-white/20" asChild>
-                      <a href={project.demo} target="_blank" rel="noreferrer"><ExternalLink className="h-4 w-4" /></a>
-                    </Button>
-                  </div>
-                </div>
-                <CardContent className="p-6">
-                  <h3 className="text-2xl font-bold mb-2 group-hover:text-primary transition-colors">{project.title}</h3>
-                  <p className="text-foreground/70 mb-6 line-clamp-2">{project.description}</p>
-                  <div className="flex flex-wrap gap-2 mt-auto">
-                    {project.tech.map((t) => (
-                      <span key={t} className="text-xs font-medium px-3 py-1 rounded-full bg-primary/10 text-primary border border-primary/20">
-                        {t}
-                      </span>
-                    ))}
-                  </div>
-                </CardContent>
-              </Card>
-            </motion.div>
-          ))}
-        </AnimatePresence>
-      </motion.div>
     </Section>
   );
 }

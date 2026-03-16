@@ -13,14 +13,14 @@ export function Footer() {
             <Github className="h-5 w-5" />
             <span className="sr-only">GitHub</span>
           </Link>
-          <Link href="https://linkedin.com" target="_blank" className="text-foreground/60 hover:text-primary transition-colors">
+          <Link href="https://www.linkedin.com/in/dhanush-kumar-b-3058962bb/" target="_blank" className="text-foreground/60 hover:text-primary transition-colors">
             <Linkedin className="h-5 w-5" />
             <span className="sr-only">LinkedIn</span>
           </Link>
-          <Link href="mailto:dhanush@example.com" className="text-foreground/60 hover:text-primary transition-colors">
+          <a href="https://mail.google.com/mail/?view=cm&fs=1&to=dhanush80729@gmail.com" target="_blank" rel="noreferrer" className="text-foreground/60 hover:text-primary transition-colors">
             <Mail className="h-5 w-5" />
             <span className="sr-only">Email</span>
-          </Link>
+          </a>
         </div>
       </div>
     </footer>

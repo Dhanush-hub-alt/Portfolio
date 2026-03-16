@@ -6,12 +6,12 @@ import { Menu, X } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 
 const navLinks = [
-  { name: "Home", href: "#hero" },
-  { name: "About", href: "#about" },
-  { name: "Skills", href: "#skills" },
-  { name: "Projects", href: "#projects" },
-  { name: "Experience", href: "#experience" },
-  { name: "Contact", href: "#contact" },
+  { name: "Home", href: "#hero", id: "hero" },
+  { name: "About", href: "#about", id: "about" },
+  { name: "Skills", href: "#skills", id: "skills" },
+  { name: "Projects", href: "#projects", id: "projects" },
+  { name: "Experience", href: "#experience", id: "experience" },
+  { name: "Contact", href: "#contact", id: "contact" },
 ];
 
 const socialLinks = [
@@ -55,14 +55,44 @@ const socialLinks = [
 
 export function Navbar() {
   const [isOpen, setIsOpen] = React.useState(false);
-  const [activeLink, setActiveLink] = React.useState("Home");
+  const [activeSection, setActiveSection] = React.useState("hero");
   const [scrolled, setScrolled] = React.useState(false);
 
+  // Track scroll for navbar background
   React.useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 20);
     window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
+
+  // IntersectionObserver to auto-highlight the section in viewport
+  React.useEffect(() => {
+    const observers: IntersectionObserver[] = [];
+
+    navLinks.forEach(({ id }) => {
+      const el = document.getElementById(id);
+      if (!el) return;
+
+      const observer = new IntersectionObserver(
+        ([entry]) => {
+          if (entry.isIntersecting) {
+            setActiveSection(id);
+          }
+        },
+        { rootMargin: "-40% 0px -55% 0px", threshold: 0 }
+      );
+
+      observer.observe(el);
+      observers.push(observer);
+    });
+
+    return () => observers.forEach((o) => o.disconnect());
+  }, []);
+
+  const handleNavClick = (id: string) => {
+    setActiveSection(id);
+    setIsOpen(false);
+  };
 
   return (
     <>
@@ -90,27 +120,29 @@ export function Navbar() {
 
           {/* Desktop Nav Links — Center */}
           <nav className="hidden md:flex items-center gap-1 flex-grow justify-center">
-            {navLinks.map((link) => (
-              <Link
-                key={link.name}
-                href={link.href}
-                onClick={() => setActiveLink(link.name)}
-                className={`relative px-4 py-2 rounded-lg text-[15px] font-semibold tracking-wide transition-all duration-200 ${
-                  activeLink === link.name
-                    ? "text-primary"
-                    : "text-slate-600 hover:text-primary"
-                }`}
-              >
-                {activeLink === link.name && (
-                  <motion.span
-                    layoutId="nav-active"
-                    className="absolute inset-0 rounded-lg bg-primary/10 border border-primary/20"
-                    transition={{ type: "spring", stiffness: 400, damping: 30 }}
+            {navLinks.map((link) => {
+              const isActive = activeSection === link.id;
+              return (
+                <Link
+                  key={link.name}
+                  href={link.href}
+                  onClick={() => handleNavClick(link.id)}
+                  className={`relative px-4 py-2 text-[15px] font-semibold tracking-wide transition-colors duration-200 group ${
+                    isActive ? "text-primary" : "text-slate-600 hover:text-primary"
+                  }`}
+                >
+                  <span className="relative z-10">{link.name}</span>
+                  {/* Blue underline — visible when active OR on hover */}
+                  <span
+                    className={`absolute bottom-0 left-1/2 -translate-x-1/2 h-[2px] bg-primary rounded-full transition-all duration-300 ${
+                      isActive
+                        ? "w-full opacity-100"
+                        : "w-0 opacity-0 group-hover:w-full group-hover:opacity-100"
+                    }`}
                   />
-                )}
-                <span className="relative z-10">{link.name}</span>
-              </Link>
-            ))}
+                </Link>
+              );
+            })}
           </nav>
 
           {/* Social Icons — Far Right */}
@@ -160,13 +192,17 @@ export function Navbar() {
                 >
                   <Link
                     href={link.href}
-                    onClick={() => { setIsOpen(false); setActiveLink(link.name); }}
-                    className={`flex items-center gap-3 px-4 py-3 rounded-xl text-[15px] font-semibold transition-all ${
-                      activeLink === link.name
-                        ? "bg-primary/10 text-primary border border-primary/20"
-                        : "text-slate-600 hover:text-primary hover:bg-primary/5"
+                    onClick={() => handleNavClick(link.id)}
+                    className={`relative flex items-center gap-3 px-4 py-3 text-[15px] font-semibold transition-all ${
+                      activeSection === link.id
+                        ? "text-primary"
+                        : "text-slate-600 hover:text-primary"
                     }`}
                   >
+                    {/* Blue left-border indicator for mobile active item */}
+                    {activeSection === link.id && (
+                      <span className="absolute left-0 top-1/2 -translate-y-1/2 w-[3px] h-5 bg-primary rounded-r-full" />
+                    )}
                     {link.name}
                   </Link>
                 </motion.div>

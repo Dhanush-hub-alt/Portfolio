@@ -20,6 +20,9 @@ export const metadata: Metadata = {
   description: "Personal portfolio of Dhanush Kumar, showcasing projects and skills in computer science.",
   keywords: ["Dhanush Kumar", "Portfolio", "Computer Science", "Web Development", "AI", "React", "Next.js"],
   authors: [{ name: "Dhanush Kumar" }],
+  icons: {
+    icon: [{ url: "/favicon.svg", type: "image/svg+xml" }],
+  },
   openGraph: {
     type: "website",
     locale: "en_US",
@@ -34,6 +37,12 @@ export const metadata: Metadata = {
     description: "Personal portfolio of Dhanush Kumar",
   },
   manifest: "/manifest.json",
+  themeColor: "#06b6d4",
+  appleWebApp: {
+    capable: true,
+    statusBarStyle: "default",
+    title: "Dhanush Kumar",
+  },
 };
 
 export default function RootLayout({

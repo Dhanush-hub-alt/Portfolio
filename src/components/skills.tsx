@@ -42,7 +42,7 @@ const skillCategories = [
 export function Skills() {
   return (
     <Section id="skills" className="relative">
-       <div className="absolute top-1/2 left-0 w-1/2 h-1/2 bg-purple-500/10 blur-[120px] rounded-full z-[-1] pointer-events-none" />
+       <div className="absolute top-1/2 left-0 w-1/2 h-1/2 bg-primary/8 blur-[120px] rounded-full z-[-1] pointer-events-none" />
       <SectionHeader 
         title="Technical Skills" 
         subtitle="My toolkit for building scalable and modern applications."
@@ -57,7 +57,7 @@ export function Skills() {
             viewport={{ once: true, margin: "-50px" }}
             transition={{ duration: 0.6, delay: catIndex * 0.1 }}
           >
-            <Card className="h-full group hover:border-purple-500/50 transition-colors">
+            <Card className="h-full group hover:border-primary/40 transition-colors">
               <CardHeader>
                 <CardTitle className="text-xl text-foreground">{category.title}</CardTitle>
               </CardHeader>
@@ -68,9 +68,9 @@ export function Skills() {
                       <span className="font-medium">{skill.name}</span>
                       <span className="text-foreground/60">{skill.level}%</span>
                     </div>
-                    <div className="h-3 w-full bg-black/10 dark:bg-white/5 rounded-full overflow-hidden shadow-inner border border-white/5">
+                    <div className="h-2.5 w-full bg-slate-100 rounded-full overflow-hidden">
                       <motion.div
-                        className="h-full bg-gradient-to-r from-primary via-purple-500 to-cyan-500 rounded-full"
+                        className="h-full bg-primary rounded-full"
                         initial={{ width: 0 }}
                         whileInView={{ width: `${skill.level}%` }}
                         viewport={{ once: true }}

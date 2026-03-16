@@ -16,7 +16,7 @@ export function GithubStats() {
     // We mock it for the portfolio to avoid API rate limits during demo
     setTimeout(() => {
       setStats({
-        repos: 45,
+        repos: 20,
         stars: 128,
         forks: 34
       });

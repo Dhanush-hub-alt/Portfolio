@@ -47,7 +47,7 @@ export function Hero() {
               </Link>
             </Button>
             <Button size="lg" variant="outline" className="w-full sm:w-auto gap-2 group glass" asChild>
-              <a href="/resume.pdf" download>
+              <a href="/Dhanush Kumar B - CSE - NCT.pdf" download>
                 Download Resume
                 <Download className="h-4 w-4 group-hover:-translate-y-1 transition-transform" />
               </a>
