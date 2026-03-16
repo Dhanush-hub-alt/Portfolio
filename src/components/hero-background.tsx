@@ -55,7 +55,7 @@ function StarBackground() {
 
 export function HeroBackground() {
   return (
-    <div className="w-full h-auto absolute inset-0 z-[-1]">
+    <div className="fixed inset-0 z-[-1] w-full h-full">
       <Canvas camera={{ position: [0, 0, 1] }}>
         <StarBackground />
       </Canvas>

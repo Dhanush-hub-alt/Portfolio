@@ -5,6 +5,17 @@ import { Section, SectionHeader } from "@/components/section";
 
 const experiences = [
   {
+    role: "Full Stack Web Development Intern",
+    company: "Azhizen Solutions",
+    duration: "20 June 2025 – 05 July 2025",
+    details: "15 days internship focusing on full-stack web development.",
+    skills: ["Node.js", "React.js", "MongoDB", "HTML", "CSS", "JavaScript"],
+    contributions: [
+      "Learned core concepts of full-stack web programming.",
+      "Developed web applications using React, Node.js and MongoDB."
+    ]
+  },
+  {
     role: "MERN Stack Intern",
     company: "IIT Ropar",
     duration: "Dec 2025 – Jan 2026",
@@ -46,7 +57,7 @@ export function Experience() {
               {/* Content */}
               <div className={`w-full md:w-1/2 pl-12 md:pl-0 ${index % 2 === 0 ? "md:text-left md:pl-16" : "md:text-right md:pr-16"}`}>
                 <div className="glass p-8 rounded-2xl border border-white/10 hover:border-cyan-500/50 transition-colors group">
-                  <h3 className="text-2xl font-bold mb-1 text-primary group-hover:neon-text-cyan transition-all">{exp.role}</h3>
+                  <h3 className="text-2xl font-bold mb-1 text-primary">{exp.role}</h3>
                   <h4 className="text-xl font-semibold text-foreground/90 mb-2">{exp.company}</h4>
                   <p className="text-sm text-cyan-500 font-medium mb-4">{exp.duration}</p>
                   <p className="text-foreground/80 mb-6 leading-relaxed">{exp.details}</p>

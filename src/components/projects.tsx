@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import Image from "next/image";
 import { Section, SectionHeader } from "@/components/section";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -40,7 +41,7 @@ const projects = [
   {
     title: "Car Accident Alert App",
     description: "A software application that aggregates data to detect potential collisions and immediately notifies emergency response.",
-    image: "https://images.unsplash.com/photo-1549635072-cdbba5f2dd3d?auto=format&fit=crop&q=80&w=800",
+    image: "https://images.unsplash.com/photo-1568605117036-5fe5e7bab0b7?auto=format&fit=crop&q=80&w=800",
     categories: ["Software Engineering", "AI"],
     tech: ["Python", "TensorFlow", "React Native"],
     github: "https://github.com",
@@ -56,7 +57,7 @@ export function Projects() {
   const filteredProjects = projects.filter(p => activeCategory === "All" || p.categories.includes(activeCategory as any));
 
   return (
-    <Section id="projects" className="bg-black/5 dark:bg-white/5">
+    <Section id="projects">
       <SectionHeader 
         title="Featured Projects" 
         subtitle="Some of my recent work bridging the gap between design and complex engineering."
@@ -91,10 +92,12 @@ export function Projects() {
               <Card className="h-full overflow-hidden group hover:shadow-[0_0_30px_rgba(6,182,212,0.15)] transition-shadow">
                 <div className="relative h-60 w-full overflow-hidden">
                   <div className="absolute inset-0 bg-black/40 group-hover:bg-black/10 transition-colors z-10" />
-                  <img 
+                  <Image 
                     src={project.image} 
                     alt={project.title} 
-                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 ease-in-out"
+                    fill
+                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                    className="object-cover group-hover:scale-110 transition-transform duration-700 ease-in-out"
                   />
                   <div className="absolute bottom-4 right-4 z-20 flex gap-2 opacity-0 group-hover:opacity-100 transition-opacity translate-y-2 group-hover:translate-y-0">
                     <Button size="icon" variant="glass" className="rounded-full bg-black/50 hover:bg-black/80 text-white backdrop-blur-md border-white/20" asChild>

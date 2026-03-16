@@ -59,7 +59,7 @@ export function Skills() {
           >
             <Card className="h-full group hover:border-purple-500/50 transition-colors">
               <CardHeader>
-                <CardTitle className="text-xl neon-text-purple">{category.title}</CardTitle>
+                <CardTitle className="text-xl text-foreground">{category.title}</CardTitle>
               </CardHeader>
               <CardContent className="space-y-6">
                 {category.skills.map((skill, index) => (

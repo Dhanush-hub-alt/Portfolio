@@ -11,14 +11,26 @@ export function Contact() {
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState(false);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setLoading(true);
-    // Simulate form submission to Formspree or EmailJS
+    
+    // Construct mailto link
+    const formData = new FormData(e.currentTarget);
+    const name = formData.get('name') || '';
+    const email = formData.get('email') || '';
+    const subject = formData.get('subject') || '';
+    const message = formData.get('message') || '';
+    
+    const mailtoLink = `mailto:dhanush80729@gmail.com?subject=${encodeURIComponent(subject as string)}&body=${encodeURIComponent(`Name: ${name}\nEmail: ${email}\n\nMessage:\n${message}`)}`;
+    
+    // Open the email client
+    window.location.href = mailtoLink;
+    
     setTimeout(() => {
       setLoading(false);
       setSuccess(true);
-    }, 1500);
+    }, 500);
   };
 
   return (
@@ -49,7 +61,7 @@ export function Contact() {
               </div>
               <div>
                 <p className="text-sm text-muted-foreground uppercase tracking-widest font-semibold mb-1">Email</p>
-                <p className="text-lg font-medium">dhanush@example.com</p>
+                <p className="text-lg font-medium">dhanush80729@gmail.com</p>
               </div>
             </div>
             <div className="flex items-center gap-6 group">
@@ -58,7 +70,7 @@ export function Contact() {
               </div>
               <div>
                 <p className="text-sm text-muted-foreground uppercase tracking-widest font-semibold mb-1">Location</p>
-                <p className="text-lg font-medium">Tamil Nadu, India</p>
+                <p className="text-lg font-medium">Namakkal, Tamil Nadu, India</p>
               </div>
             </div>
           </div>
@@ -90,6 +102,7 @@ export function Contact() {
                       <label htmlFor="name" className="text-sm font-semibold uppercase tracking-wider text-muted-foreground">Your Name</label>
                       <input 
                         id="name"
+                        name="name"
                         required
                         className="w-full bg-black/5 dark:bg-white/5 border border-black/10 dark:border-white/10 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-primary/50 transition-all font-sans"
                         placeholder="John Doe"
@@ -99,6 +112,7 @@ export function Contact() {
                       <label htmlFor="email" className="text-sm font-semibold uppercase tracking-wider text-muted-foreground">Your Email</label>
                       <input 
                         id="email"
+                        name="email"
                         type="email"
                         required
                         className="w-full bg-black/5 dark:bg-white/5 border border-black/10 dark:border-white/10 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-primary/50 transition-all font-sans"
@@ -110,6 +124,7 @@ export function Contact() {
                     <label htmlFor="subject" className="text-sm font-semibold uppercase tracking-wider text-muted-foreground">Subject</label>
                     <input 
                       id="subject"
+                      name="subject"
                       required
                       className="w-full bg-black/5 dark:bg-white/5 border border-black/10 dark:border-white/10 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-primary/50 transition-all font-sans"
                       placeholder="Project Inquiry"
@@ -119,6 +134,7 @@ export function Contact() {
                     <label htmlFor="message" className="text-sm font-semibold uppercase tracking-wider text-muted-foreground">Message</label>
                     <textarea 
                       id="message"
+                      name="message"
                       required
                       rows={5}
                       className="w-full bg-black/5 dark:bg-white/5 border border-black/10 dark:border-white/10 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-primary/50 transition-all resize-none font-sans"

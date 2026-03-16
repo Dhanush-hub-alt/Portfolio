@@ -38,7 +38,7 @@ export function SectionHeader({ title, subtitle, className }: SectionHeaderProps
       transition={{ duration: 0.5 }}
       className={cn("text-center mb-16", className)}
     >
-      <h2 className="text-3xl md:text-5xl font-bold mb-4 neon-text-cyan tracking-tight">{title}</h2>
+      <h2 className="text-3xl md:text-5xl font-bold mb-4 tracking-tight">{title}</h2>
       {subtitle && <p className="text-foreground/70 text-lg max-w-2xl mx-auto">{subtitle}</p>}
     </motion.div>
   );

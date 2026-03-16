@@ -25,7 +25,7 @@ export function GithubStats() {
   }, []);
 
   return (
-    <Section id="github" className="bg-black/5 dark:bg-white/5 relative">
+    <Section id="github" className="relative">
       <div className="absolute top-1/2 right-0 w-1/3 h-1/2 bg-cyan-500/10 blur-[120px] rounded-full z-[-1] pointer-events-none" />
       <SectionHeader 
         title="GitHub Activity" 
@@ -69,7 +69,7 @@ export function GithubStats() {
           href="https://github.com/Dhanush-hub-alt" 
           target="_blank"
           rel="noreferrer"
-          className="inline-flex items-center gap-2 px-8 py-4 rounded-full bg-foreground text-background font-medium shadow-lg hover:shadow-xl transition-all hover:scale-105"
+          className="inline-flex items-center gap-2 px-8 py-4 rounded-full bg-primary text-white font-medium shadow-lg hover:shadow-xl hover:bg-primary/80 transition-all hover:scale-105"
           whileTap={{ scale: 0.95 }}
         >
           <Github className="h-5 w-5" />

@@ -2,31 +2,36 @@
 
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
-import { HeroBackground } from "./hero-background";
 import { ArrowRight, Download } from "lucide-react";
 import Link from "next/link";
 
 export function Hero() {
   return (
     <section id="hero" className="relative h-screen flex flex-col items-center justify-center overflow-hidden w-full">
-      <HeroBackground />
       <div className="container mx-auto px-4 z-10 flex flex-col items-center text-center">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, ease: "easeOut" }}
-          className="max-w-3xl"
+          className="max-w-3xl flex flex-col items-center"
         >
           <motion.div
-            initial={{ opacity: 0, scale: 0.8 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ delay: 0.2, duration: 0.5 }}
-            className="mb-6 inline-block rounded-full border border-white/20 glass px-4 py-1.5 text-sm font-medium text-primary shadow-sm"
+            initial={{ scale: 0.8, opacity: 0 }}
+            animate={{ scale: 1, opacity: 1 }}
+            transition={{ delay: 0.2, duration: 0.5, type: "spring" }}
+            className="mb-8 relative w-52 h-52 md:w-72 md:h-72 rounded-full border-[6px] border-primary/30 p-2 group overflow-hidden shadow-2xl shadow-primary/20"
           >
-            Available for new opportunities
+            <div className="w-full h-full rounded-full overflow-hidden relative">
+              <img
+                src="/profile.png"
+                alt="Dhanush Kumar"
+                className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+              />
+            </div>
           </motion.div>
-          <h1 className="text-5xl md:text-7xl font-extrabold tracking-tight mb-6 mt-4">
-            Hi, I'm <span className="neon-text-cyan">Dhanush</span>
+
+          <h1 className="text-4xl md:text-6xl font-extrabold tracking-tight mb-6 mt-4 whitespace-nowrap">
+            Hi, I'm <span className="text-primary">Dhanush Kumar</span>
           </h1>
           <h2 className="text-2xl md:text-4xl font-bold mb-6 text-foreground/80">
             A 3rd Year Computer Science Engineering Student
