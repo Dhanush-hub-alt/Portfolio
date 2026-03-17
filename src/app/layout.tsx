@@ -1,17 +1,12 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Inter } from "next/font/google";
 import "./globals.css";
 import { Navbar } from "@/components/navbar";
 import { Footer } from "@/components/footer";
 import { HeroBackground } from "@/components/hero-background";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
+const inter = Inter({
+  variable: "--font-inter",
   subsets: ["latin"],
 });
 
@@ -21,7 +16,7 @@ export const metadata: Metadata = {
   keywords: ["Dhanush Kumar", "Portfolio", "Computer Science", "Web Development", "AI", "React", "Next.js"],
   authors: [{ name: "Dhanush Kumar" }],
   icons: {
-    icon: [{ url: "/favicon.svg", type: "image/svg+xml" }],
+    icon: [{ url: "/Portfolio/favicon.svg", type: "image/svg+xml" }],
   },
   openGraph: {
     type: "website",
@@ -36,13 +31,16 @@ export const metadata: Metadata = {
     title: "Dhanush Kumar | Portfolio",
     description: "Personal portfolio of Dhanush Kumar",
   },
-  manifest: "/manifest.json",
-  themeColor: "#06b6d4",
+  manifest: "/Portfolio/manifest.json",
   appleWebApp: {
     capable: true,
     statusBarStyle: "default",
     title: "Dhanush Kumar",
   },
+};
+
+export const viewport = {
+  themeColor: "#06b6d4",
 };
 
 export default function RootLayout({
@@ -53,7 +51,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased text-foreground text-[17px]`}
+        className={`${inter.variable} font-sans antialiased text-foreground text-[17px]`}
       >
         {/* Global animated star background */}
         <HeroBackground />

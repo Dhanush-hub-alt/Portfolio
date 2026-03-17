@@ -23,7 +23,7 @@ export function Hero() {
           >
             <div className="w-full h-full rounded-full overflow-hidden relative">
               <img
-                src="/profile.png"
+                src="/Portfolio/profile.png"
                 alt="Dhanush Kumar"
                 className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
               />
@@ -47,7 +47,7 @@ export function Hero() {
               </Link>
             </Button>
             <Button size="lg" variant="outline" className="w-full sm:w-auto gap-2 group glass" asChild>
-              <a href="/Dhanush Kumar B - CSE - NCT.pdf" download>
+              <a href="/Portfolio/Dhanush Kumar B - CSE - NCT.pdf" download>
                 Download Resume
                 <Download className="h-4 w-4 group-hover:-translate-y-1 transition-transform" />
               </a>
