@@ -1,7 +1,6 @@
 "use client";
 
 import * as React from "react";
-import Link from "next/link";
 import { Menu, X } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 
@@ -89,9 +88,14 @@ export function Navbar() {
     return () => observers.forEach((o) => o.disconnect());
   }, []);
 
-  const handleNavClick = (id: string) => {
+  const handleNavClick = (id: string, e: React.MouseEvent<HTMLAnchorElement>) => {
+    e.preventDefault();
     setActiveSection(id);
     setIsOpen(false);
+    const element = document.getElementById(id);
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' });
+    }
   };
 
   return (
@@ -106,8 +110,9 @@ export function Navbar() {
         <div className="w-full px-6 lg:px-10 h-16 flex items-center justify-between gap-6">
 
           {/* Brand — Far Left */}
-          <Link
-            href="/"
+          <a
+            href="#hero"
+            onClick={(e) => handleNavClick("hero", e)}
             className="flex-shrink-0 flex items-center gap-3 group"
           >
             <div className="flex flex-col leading-none">
@@ -116,17 +121,17 @@ export function Navbar() {
               </span>
             </div>
             <div className="w-px h-8 bg-slate-300 ml-2 hidden sm:block" />
-          </Link>
+          </a>
 
           {/* Desktop Nav Links — Center */}
           <nav className="hidden md:flex items-center gap-1 flex-grow justify-center">
             {navLinks.map((link) => {
               const isActive = activeSection === link.id;
               return (
-                <Link
+                <a
                   key={link.name}
                   href={link.href}
-                  onClick={() => handleNavClick(link.id)}
+                  onClick={(e) => handleNavClick(link.id, e)}
                   className={`relative px-4 py-2 text-[15px] font-semibold tracking-wide transition-colors duration-200 group ${
                     isActive ? "text-primary" : "text-slate-600 hover:text-primary"
                   }`}
@@ -140,7 +145,7 @@ export function Navbar() {
                         : "w-0 opacity-0 group-hover:w-full group-hover:opacity-100"
                     }`}
                   />
-                </Link>
+                </a>
               );
             })}
           </nav>
@@ -190,9 +195,9 @@ export function Navbar() {
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ delay: i * 0.04 }}
                 >
-                  <Link
+                  <a
                     href={link.href}
-                    onClick={() => handleNavClick(link.id)}
+                    onClick={(e) => handleNavClick(link.id, e)}
                     className={`relative flex items-center gap-3 px-4 py-3 text-[15px] font-semibold transition-all ${
                       activeSection === link.id
                         ? "text-primary"
@@ -204,7 +209,7 @@ export function Navbar() {
                       <span className="absolute left-0 top-1/2 -translate-y-1/2 w-[3px] h-5 bg-primary rounded-r-full" />
                     )}
                     {link.name}
-                  </Link>
+                  </a>
                 </motion.div>
               ))}
 

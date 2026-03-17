@@ -3,12 +3,10 @@
 import { useRef, useMemo } from "react";
 import { Canvas, useFrame } from "@react-three/fiber";
 import { Points, PointMaterial } from "@react-three/drei";
-import { useTheme } from "next-themes";
 import * as THREE from "three";
 
 function StarBackground() {
   const ref = useRef<THREE.Points>(null);
-  const { resolvedTheme } = useTheme();
   
   // Generate random points in a sphere
   const sphere = useMemo(() => {
@@ -36,7 +34,7 @@ function StarBackground() {
     }
   });
 
-  const color = resolvedTheme === "light" ? "#3b82f6" : "#06b6d4";
+  const color = "#06b6d4"; // Default cyan color
 
   return (
     <group rotation={[0, 0, Math.PI / 4]}>

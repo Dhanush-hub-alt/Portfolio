@@ -8,7 +8,7 @@
   --color-primary: #3b82f6; /* Deep blue */
   --color-purple: #a855f7; /* Electric Purple */
   --color-cyan: #06b6d4; /* Neon Cyan */
-  --font-sans: var(--font-inter), ui-sans-serif, system-ui;
+  --font-sans: "Inter", ui-sans-serif, system-ui;
   --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
 }
 

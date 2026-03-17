@@ -3,9 +3,16 @@
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Download } from "lucide-react";
-import Link from "next/link";
 
 export function Hero() {
+  const handleScrollToProjects = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    e.preventDefault();
+    const element = document.getElementById("projects");
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
   return (
     <section id="hero" className="relative h-screen flex flex-col items-center justify-center overflow-hidden w-full">
       <div className="container mx-auto px-4 z-10 flex flex-col items-center text-center">
@@ -23,7 +30,7 @@ export function Hero() {
           >
             <div className="w-full h-full rounded-full overflow-hidden relative">
               <img
-                src="/Portfolio/profile.png"
+                src="/Portfolio/assets/images/profile.png"
                 alt="Dhanush Kumar"
                 className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
               />
@@ -41,13 +48,13 @@ export function Hero() {
           </p>
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
             <Button size="lg" className="w-full sm:w-auto gap-2 group hover:shadow-[0_0_20px_rgba(6,182,212,0.4)] transition-all" asChild>
-              <Link href="#projects">
+              <a href="#projects" onClick={handleScrollToProjects}>
                 View Projects
                 <ArrowRight className="h-4 w-4 group-hover:translate-x-1 transition-transform" />
-              </Link>
+              </a>
             </Button>
             <Button size="lg" variant="outline" className="w-full sm:w-auto gap-2 group glass" asChild>
-              <a href="/Portfolio/Dhanush Kumar B - CSE - NCT.pdf" download>
+              <a href="/Portfolio/assets/images/Dhanush Kumar B - CSE - NCT.pdf" download>
                 Download Resume
                 <Download className="h-4 w-4 group-hover:-translate-y-1 transition-transform" />
               </a>

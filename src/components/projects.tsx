@@ -1,7 +1,6 @@
 "use client";
 
 import { motion } from "framer-motion";
-import Image from "next/image";
 import { Section, SectionHeader } from "@/components/section";
 import { Card, CardContent } from "@/components/ui/card";
 import { Github, ExternalLink, Cpu, Wind, Globe } from "lucide-react";
@@ -73,12 +72,10 @@ export function Projects() {
               {/* Image */}
               <div className="relative h-52 w-full overflow-hidden flex-shrink-0">
                 <div className="absolute inset-0 bg-black/30 group-hover:bg-black/10 transition-colors z-10" />
-                <Image
+                <img
                   src={project.image}
                   alt={project.title}
-                  fill
-                  sizes="(max-width: 768px) 100vw, 33vw"
-                  className="object-cover group-hover:scale-105 transition-transform duration-700 ease-in-out"
+                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-in-out"
                 />
                 {/* Badge */}
                 <span className="absolute top-3 left-3 z-20 text-xs font-semibold px-3 py-1 rounded-full bg-black/60 text-white backdrop-blur-sm border border-white/20">

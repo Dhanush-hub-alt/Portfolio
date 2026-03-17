@@ -1,212 +1,110 @@
 "use client";
 
-import { useState } from "react";
 import { motion } from "framer-motion";
 import { Section, SectionHeader } from "@/components/section";
 import { Card, CardContent } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
-import { MapPin, Mail, Send, CheckCircle2, AlertCircle } from "lucide-react";
+import { MapPin, Mail, Github, Linkedin, ExternalLink } from "lucide-react";
 
 export function Contact() {
-  const [loading, setLoading] = useState(false);
-  const [status, setStatus] = useState<"idle" | "success" | "error">("idle");
-
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    setLoading(true);
-    setStatus("idle");
-
-    const formData = new FormData(e.currentTarget);
-    const payload = {
-      name: formData.get("name") as string,
-      email: formData.get("email") as string,
-      subject: formData.get("subject") as string,
-      message: formData.get("message") as string,
-    };
-
-    try {
-      // For GitHub Pages (static), we use Formspree or similar
-      // Replaces the internal /api/contact/ route which won't work on static hosting
-      const res = await fetch("https://formspree.io/f/mqakeebv", { // Using a placeholder ID
-        method: "POST",
-        headers: { "Content-Type": "application/json", "Accept": "application/json" },
-        body: JSON.stringify(payload),
-      });
-
-      if (res.ok) {
-        setStatus("success");
-        (e.target as HTMLFormElement).reset();
-      } else {
-        setStatus("error");
-      }
-    } catch {
-      setStatus("error");
-    } finally {
-      setLoading(false);
+  const contactMethods = [
+    {
+      title: "Email",
+      value: "dhanush80729@gmail.com",
+      description: "Send me an email for inquiries",
+      icon: <Mail className="w-8 h-8 text-primary" />,
+      link: "https://mail.google.com/mail/?view=cm&fs=1&to=dhanush80729@gmail.com",
+      color: "bg-primary/10",
+      borderColor: "hover:border-primary/50"
+    },
+    {
+      title: "LinkedIn",
+      value: "Dhanush Kumar B",
+      description: "Let's connect professionally",
+      icon: <Linkedin className="w-8 h-8 text-[#0a66c2]" />,
+      link: "https://www.linkedin.com/in/dhanush-kumar-b-3058962bb/",
+      color: "bg-[#0a66c2]/10",
+      borderColor: "hover:border-[#0a66c2]/50"
+    },
+    {
+      title: "GitHub",
+      value: "Dhanush-hub-alt",
+      description: "Check out my latest projects",
+      icon: <Github className="w-8 h-8 text-foreground" />,
+      link: "https://github.com/Dhanush-hub-alt",
+      color: "bg-foreground/10",
+      borderColor: "hover:border-foreground/50"
+    },
+    {
+      title: "Location",
+      value: "Namakkal, Tamil Nadu, India",
+      description: "Open to remote & on-site work",
+      icon: <MapPin className="w-8 h-8 text-purple-500" />,
+      link: "https://www.google.com/maps/place/Namakkal,+Tamil+Nadu",
+      color: "bg-purple-500/10",
+      borderColor: "hover:border-purple-500/50"
     }
-  };
+  ];
 
   return (
     <Section id="contact" className="relative">
-      <div className="absolute top-1/2 left-0 w-1/3 h-1/2 bg-primary/10 blur-[120px] rounded-full z-[-1] pointer-events-none" />
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-3/4 h-3/4 bg-primary/10 blur-[120px] rounded-full z-[-1] pointer-events-none" />
 
       <SectionHeader
-        title="Get In Touch"
-        subtitle="Have a project in mind or want to collaborate? Feel free to reach out."
+        title="Connect With Me"
+        subtitle="I'm always open to discussing new projects, creative ideas or opportunities to be part of your visions."
       />
 
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 w-full max-w-6xl mx-auto mt-12">
-        <motion.div
-          initial={{ opacity: 0, x: -30 }}
-          whileInView={{ opacity: 1, x: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-        >
-          <h3 className="text-3xl font-bold mb-6">Let's talk about everything!</h3>
-          <p className="text-foreground/70 mb-10 text-lg leading-relaxed">
-            I'm currently seeking new opportunities and open to exciting projects. Whether you have a question or just want to say hi, I'll try my best to get back to you!
-          </p>
-
-          <div className="space-y-8">
-            <div className="flex items-center gap-6 group">
-              <div className="w-14 h-14 rounded-full border border-primary/30 bg-primary/5 flex items-center justify-center text-primary group-hover:scale-110 group-hover:bg-primary group-hover:text-white group-hover:border-primary group-hover:shadow-lg group-hover:shadow-primary/30 transition-all duration-300">
-                <Mail className="w-6 h-6" />
-              </div>
-              <div>
-                <p className="text-sm text-muted-foreground uppercase tracking-widest font-semibold mb-1">Email</p>
-                <p className="text-lg font-medium">dhanush80729@gmail.com</p>
-              </div>
-            </div>
-            <div className="flex items-center gap-6 group">
-              <div className="w-14 h-14 rounded-full border border-purple-400/30 bg-purple-500/5 flex items-center justify-center text-purple-500 group-hover:scale-110 group-hover:bg-purple-500 group-hover:text-white group-hover:border-purple-500 group-hover:shadow-lg group-hover:shadow-purple-500/30 transition-all duration-300">
-                <MapPin className="w-6 h-6" />
-              </div>
-              <div>
-                <p className="text-sm text-muted-foreground uppercase tracking-widest font-semibold mb-1">Location</p>
-                <p className="text-lg font-medium">Namakkal, Tamil Nadu, India</p>
-              </div>
-            </div>
-          </div>
-        </motion.div>
-
-        <motion.div
-          initial={{ opacity: 0, x: 30 }}
-          whileInView={{ opacity: 1, x: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-        >
-          <Card className="hover:border-primary/50 transition-colors shadow-xl">
-            <CardContent className="p-8 md:p-10">
-
-              {/* Success State */}
-              {status === "success" ? (
-                <div className="h-full min-h-[400px] flex flex-col items-center justify-center text-center space-y-4">
-                  <div className="w-20 h-20 rounded-full bg-green-500/15 flex items-center justify-center mb-4">
-                    <CheckCircle2 className="w-10 h-10 text-green-500" />
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 w-full max-w-7xl mx-auto mt-16 px-4">
+        {contactMethods.map((method, index) => (
+          <motion.div
+            key={method.title}
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, delay: index * 0.1 }}
+          >
+            <a 
+              href={method.link} 
+              target="_blank" 
+              rel="noreferrer"
+              className="block group h-full"
+            >
+              <Card className={`h-full border border-white/10 glass transition-all duration-300 ${method.borderColor} group-hover:-translate-y-2`}>
+                <CardContent className="p-8 flex flex-col items-center text-center gap-4">
+                  <div className={`p-4 rounded-2xl ${method.color} transition-transform group-hover:scale-110 duration-300 relative`}>
+                    {method.icon}
+                    <div className="absolute -top-1 -right-1 opacity-0 group-hover:opacity-100 transition-opacity">
+                      <ExternalLink className="w-4 h-4 text-foreground/40" />
+                    </div>
                   </div>
-                  <h4 className="text-2xl font-bold text-green-600">Message Sent!</h4>
-                  <p className="text-foreground/65 text-base max-w-xs">
-                    Thanks for reaching out! I'll get back to you at your email soon.
+                  
+                  <div className="space-y-1">
+                    <h3 className="text-xl font-bold">{method.title}</h3>
+                    <p className="text-sm text-foreground/60 font-medium">{method.description}</p>
+                  </div>
+                  
+                  <p className="text-[15px] font-semibold text-foreground/90 mt-2 break-all">
+                    {method.value}
                   </p>
-                  <Button
-                    onClick={() => setStatus("idle")}
-                    variant="outline"
-                    className="mt-6 rounded-full"
-                  >
-                    Send Another Message
-                  </Button>
-                </div>
-              ) : (
-                <form onSubmit={handleSubmit} className="space-y-6">
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <div className="space-y-2">
-                      <label htmlFor="name" className="text-sm font-semibold uppercase tracking-wider text-muted-foreground">
-                        Your Name
-                      </label>
-                      <input
-                        id="name"
-                        name="name"
-                        required
-                        className="w-full bg-black/5 border border-black/10 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-primary/50 transition-all font-sans"
-                        placeholder="John Doe"
-                      />
-                    </div>
-                    <div className="space-y-2">
-                      <label htmlFor="email" className="text-sm font-semibold uppercase tracking-wider text-muted-foreground">
-                        Your Email
-                      </label>
-                      <input
-                        id="email"
-                        name="email"
-                        type="email"
-                        required
-                        className="w-full bg-black/5 border border-black/10 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-primary/50 transition-all font-sans"
-                        placeholder="john@example.com"
-                      />
-                    </div>
-                  </div>
-                  <div className="space-y-2">
-                    <label htmlFor="subject" className="text-sm font-semibold uppercase tracking-wider text-muted-foreground">
-                      Subject
-                    </label>
-                    <input
-                      id="subject"
-                      name="subject"
-                      required
-                      className="w-full bg-black/5 border border-black/10 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-primary/50 transition-all font-sans"
-                      placeholder="Project Inquiry"
-                    />
-                  </div>
-                  <div className="space-y-2">
-                    <label htmlFor="message" className="text-sm font-semibold uppercase tracking-wider text-muted-foreground">
-                      Message
-                    </label>
-                    <textarea
-                      id="message"
-                      name="message"
-                      required
-                      rows={5}
-                      className="w-full bg-black/5 border border-black/10 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-primary/50 transition-all resize-none font-sans"
-                      placeholder="I'd like to talk about..."
-                    />
-                  </div>
-
-                  {/* Error banner */}
-                  {status === "error" && (
-                    <div className="flex items-center gap-3 p-3 rounded-lg bg-red-50 border border-red-200 text-red-600 text-sm">
-                      <AlertCircle className="w-4 h-4 flex-shrink-0" />
-                      Failed to send. Please check your internet connection and try again.
-                    </div>
-                  )}
-
-                  <Button
-                    type="submit"
-                    size="lg"
-                    className="w-full gap-2 rounded-full mt-2 h-12"
-                    disabled={loading}
-                  >
-                    {loading ? (
-                      <span className="flex items-center gap-2">
-                        <svg className="animate-spin h-4 w-4" viewBox="0 0 24 24" fill="none">
-                          <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
-                          <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8z" />
-                        </svg>
-                        Sending…
-                      </span>
-                    ) : (
-                      <>
-                        Send Message
-                        <Send className="w-4 h-4" />
-                      </>
-                    )}
-                  </Button>
-                </form>
-              )}
-
-            </CardContent>
-          </Card>
-        </motion.div>
+                </CardContent>
+              </Card>
+            </a>
+          </motion.div>
+        ))}
       </div>
+
+      <motion.div 
+        initial={{ opacity: 0 }}
+        whileInView={{ opacity: 1 }}
+        transition={{ delay: 0.6 }}
+        className="text-center mt-20 p-8 glass rounded-3xl border border-white/10 max-w-3xl mx-auto"
+      >
+        <h4 className="text-2xl font-bold mb-4 italic text-primary">"Let's build something extraordinary together."</h4>
+        <p className="text-foreground/70">
+          Whether you have a specific project in mind or just want to chat about tech, 
+          I'm just a click away.
+        </p>
+      </motion.div>
     </Section>
   );
 }
